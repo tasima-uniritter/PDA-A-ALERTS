@@ -1,16 +1,18 @@
 # PDA-A-ALERTS
 
-* Conf WS
-. dontpad.com/uniritter-tasima/tda-2018/trabalho
+## Conf WS
+- dontpad.com/uniritter-tasima/tda-2018/trabalho
 
-* GruPOS - Whatsapp
+## GruPOS - Whatsapp
+<ul>
 - Gian
 - Eduardo
 - Gustavo
 - Anderson
 - Andre
+</ul>
 
-* Alerta:
+## Alerta:
 - Springboot
 - Camel
 -- Activemq
