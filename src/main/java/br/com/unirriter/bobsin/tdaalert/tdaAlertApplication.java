@@ -19,5 +19,4 @@ public class tdaAlertApplication {
 		messageBundle.setDefaultEncoding("UTF-8");
 		return messageBundle;
 	}
-
 }

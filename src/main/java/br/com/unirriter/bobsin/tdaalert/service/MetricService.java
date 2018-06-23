@@ -22,15 +22,15 @@ public class MetricService {
         return metricRepository.findAll();
     }
 
-    public Metric buscarPorId(Long id) {
-        return metricRepository.findByCode(id);
+    public Metric buscarPorId(Long code) {
+        return metricRepository.findByCode(code);
     }
 
-    public Metric buscarPorName(Long name) {
+    public Metric buscarPorName(String name) {
         return metricRepository.findByName(name);
     }
 
-    public void deletar(long id) {
+    /*public void deletar(Long id) {
         metricRepository.delete(id);
-    }
+    }*/
 }
