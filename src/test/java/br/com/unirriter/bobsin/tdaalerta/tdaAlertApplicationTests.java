@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TdaalertaApplicationTests {
+public class tdaAlertApplicationTests {
 
 	@Test
 	public void contextLoads() {
