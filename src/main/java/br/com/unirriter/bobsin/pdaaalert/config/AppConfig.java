@@ -1,4 +1,4 @@
-package br.com.unirriter.bobsin.tdaalert.config;
+package br.com.unirriter.bobsin.pdaaalert.config;
 
 import org.springframework.context.annotation.Configuration;
 

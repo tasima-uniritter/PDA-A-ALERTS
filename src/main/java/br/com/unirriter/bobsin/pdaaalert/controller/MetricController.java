@@ -1,7 +1,7 @@
-package br.com.unirriter.bobsin.tdaalert.controller;
+package br.com.unirriter.bobsin.pdaaalert.controller;
 
-import br.com.unirriter.bobsin.tdaalert.domain.Metric;
-import br.com.unirriter.bobsin.tdaalert.service.MetricService;
+import br.com.unirriter.bobsin.pdaaalert.domain.Metric;
+import br.com.unirriter.bobsin.pdaaalert.service.MetricService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
@@ -19,15 +19,15 @@ public class MetricController {
     @Autowired
     private MetricService metricService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/listar")
-    public ResponseEntity<List<Metric>> listar() {
-        return new ResponseEntity<>(metricService.listarTodos(), HttpStatus.OK);
+    @RequestMapping(method = RequestMethod.GET, value = "/list")
+    public ResponseEntity<List<Metric>> list() {
+        return new ResponseEntity<>(metricService.listAll(), HttpStatus.OK);
     }
 
     @SuppressWarnings("unchecked")
-    @RequestMapping(method = RequestMethod.GET, value = "/buscar/{name}")
-    public ResponseEntity<Metric> buscarPorName(@PathVariable String name) {
-        Metric metric = metricService.buscarPorName(name);
+    @RequestMapping(method = RequestMethod.GET, value = "/find/{name}")
+    public ResponseEntity<Metric> findByName(@PathVariable String name) {
+        Metric metric = metricService.findByName(name);
         if (metric != null) {
             return new ResponseEntity(metric, HttpStatus.OK);
         } else {
@@ -37,8 +37,8 @@ public class MetricController {
 
     @SuppressWarnings("unchecked")
     @RequestMapping(method = RequestMethod.GET, value = "/id/{id}")
-    public ResponseEntity<Metric> buscarPorId(@PathVariable long id) {
-        Metric metric = metricService.buscarPorId(id);
+    public ResponseEntity<Metric> findById(@PathVariable long id) {
+        Metric metric = metricService.findById(id);
         if (metric != null) {
             return new ResponseEntity(metric, HttpStatus.OK);
         } else {
@@ -46,15 +46,15 @@ public class MetricController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/cadastrar")
-    public ResponseEntity<?> cadastrar(@Validated @RequestBody Metric metric) {
-        metricService.cadastrar(metric);
+    @RequestMapping(method = RequestMethod.POST, value = "/create")
+    public ResponseEntity<?> create(@Validated @RequestBody Metric metric) {
+        metricService.create(metric);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
-    /*@RequestMapping(method = RequestMethod.DELETE, value = "/deletar/{id}")
-    public ResponseEntity<?> deletar(@PathVariable Long id) {
-        metricService.deletar(id);
+    @RequestMapping(method = RequestMethod.DELETE, value = "/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        metricService.delete(id);
         return new ResponseEntity(HttpStatus.OK);
-    }*/
+    }
 }

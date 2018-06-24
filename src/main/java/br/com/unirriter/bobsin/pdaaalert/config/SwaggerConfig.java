@@ -1,4 +1,4 @@
-package br.com.unirriter.bobsin.tdaalert.config;
+package br.com.unirriter.bobsin.pdaaalert.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,7 @@ public class SwaggerConfig {
     public Docket productApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("br.com.unirriter.bobsin.tdaalert.controller"))
+                .apis(RequestHandlerSelectors.basePackage("br.com.unirriter.bobsin.pdaaalert.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(metaData());

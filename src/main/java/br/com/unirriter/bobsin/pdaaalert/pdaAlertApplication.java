@@ -1,4 +1,4 @@
-package br.com.unirriter.bobsin.tdaalert;
+package br.com.unirriter.bobsin.pdaaalert;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
 @SpringBootApplication
-public class tdaAlertApplication {
+public class pdaAlertApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(tdaAlertApplication.class, args);
+		SpringApplication.run(pdaAlertApplication.class, args);
 	}
 
 	@Bean
