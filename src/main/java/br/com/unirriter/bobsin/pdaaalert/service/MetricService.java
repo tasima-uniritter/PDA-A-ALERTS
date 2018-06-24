@@ -23,7 +23,7 @@ public class MetricService {
         return metricRepository.findAll();
     }
 
-    public Metric findById(Long id) {
+    public Metric findByCode(Long id) {
         return metricRepository.findByCode(id);
     }
 

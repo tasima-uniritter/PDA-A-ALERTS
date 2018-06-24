@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="AGENDA")
+@Table(name="SCHEDULE")
 
 public class Schedule {
     @Id

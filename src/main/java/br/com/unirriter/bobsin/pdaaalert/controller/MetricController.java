@@ -38,7 +38,7 @@ public class MetricController {
     @SuppressWarnings("unchecked")
     @RequestMapping(method = RequestMethod.GET, value = "/id/{id}")
     public ResponseEntity<Metric> findById(@PathVariable long id) {
-        Metric metric = metricService.findById(id);
+        Metric metric = metricService.findByCode(id);
         if (metric != null) {
             return new ResponseEntity(metric, HttpStatus.OK);
         } else {

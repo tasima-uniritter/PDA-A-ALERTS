@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="TEAM")
+@Table(name="AUDIT")
 
 public class Audit {
     @Id
