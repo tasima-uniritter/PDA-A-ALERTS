@@ -24,8 +24,8 @@ public class SwaggerConfig {
     }
     private ApiInfo metaData() {
         ApiInfo apiInfo = new ApiInfo(
-                "test",
-                " - TASIMA",
+                "PDA A ALERT - TASIMA",
+                "Trabalho da Disciplina de Práticas de Desenvolvimento Ágil - Uniritter",
                 "1.0",
                 "Terms of service",
                 "",

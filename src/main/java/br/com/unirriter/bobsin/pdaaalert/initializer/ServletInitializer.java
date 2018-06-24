@@ -1,5 +1,6 @@
-package br.com.unirriter.bobsin.pdaaalert;
+package br.com.unirriter.bobsin.pdaaalert.initializer;
 
+import br.com.unirriter.bobsin.pdaaalert.pdaAlertApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 

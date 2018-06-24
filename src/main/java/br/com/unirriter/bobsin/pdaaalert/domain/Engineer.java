@@ -1,36 +1,45 @@
 package br.com.unirriter.bobsin.pdaaalert.domain;
 
+import br.com.unirriter.bobsin.pdaaalert.serializer.TeamSerializer;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @NoArgsConstructor
 @Entity
 @Table(name="ENGINEER")
 
 public class Engineer {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="ID")
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="ENGINEER_ID")
+    private Long engineerId;
+
+    @ManyToOne
+    @JsonSerialize(using = TeamSerializer.class)
+    @JoinColumn(name = "TEAM_ID")
+    private Team teamId;
 
     @NotNull
-    @Column(name="FK_TEAM_ID")
-    private Long fk_team_id;
-
-    @NotNull
-    @Size(min = 1, max = 150)
-    @Column(name="NAME")
+    @Column(name="NAME", unique = true)
     private String name;
 
-    @Size(min = 1, max = 150)
-    @Column(name="EMAIL")
+    @NotNull
+    @Column(name="EMAIL", unique = true)
     private String email;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "engineerId", cascade = CascadeType.ALL)
+    private List<Schedule> engineerSchedule;
 
 }

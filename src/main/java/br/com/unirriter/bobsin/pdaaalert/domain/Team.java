@@ -1,14 +1,20 @@
 package br.com.unirriter.bobsin.pdaaalert.domain;
 
+import br.com.unirriter.bobsin.pdaaalert.serializer.MetricSerializer;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.util.List;
 
 @Data
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -16,21 +22,23 @@ import javax.validation.constraints.Size;
 
 public class Team {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="ID")
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="TEAM_ID")
+    private Long teamId;
 
-    @NotNull
-    @Column(name="FK_METRIC_CODE")
-    private Long fk_metric_code;
+    @ManyToOne
+    @JoinColumn(name = "METRIC_CODE", unique = true)
+    @JsonSerialize(using = MetricSerializer.class)
+    private Metric metricCode;
 
-    @NotNull
-    @Size(min = 1, max = 150)
-    @Column(name="NAME")
+    @Column(name="NAME", unique = true)
     private String name;
 
-    @Size(min = 1, max = 300)
-    @Column(name="DESC")
-    private String desc;
+    @Column(name="DESCRIPTION")
+    private String description;
 
+    @JsonBackReference
+    @Fetch(FetchMode.SELECT)
+    @OneToMany(mappedBy = "teamId")
+    private List<Engineer> engineer;
 }

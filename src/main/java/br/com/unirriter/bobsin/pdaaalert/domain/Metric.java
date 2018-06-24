@@ -1,13 +1,15 @@
 package br.com.unirriter.bobsin.pdaaalert.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Data
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -15,16 +17,15 @@ import javax.validation.constraints.Size;
 
 public class Metric {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="CODE")
     private Long code;
 
     @NotNull
-    @Size(min = 1, max = 150)
-    @Column(name="NAME")
+    @Column(name="NAME", unique = true)
     private String name;
 
-    @Size(min = 1, max = 300)
-    @Column(name="SPEC")
-    private String spec;
+    @NotNull
+    @Column(name="VALUE")
+    private String value;
 }
