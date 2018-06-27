@@ -42,7 +42,6 @@ clean << {
 }
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-activemq')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-jersey')
 	compile('org.springframework.boot:spring-boot-starter-web')
@@ -52,6 +51,6 @@ dependencies {
 	runtime('org.springframework.boot:spring-boot-starter-tomcat')
 	runtime('com.h2database:h2')
 	runtime('org.springframework.boot:spring-boot-devtools')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
-	testCompile('io.rest-assured:rest-assured:3.0.3')
+    compile("org.apache.camel:camel-amqp:2.21.1")
+    compile("org.apache.camel:camel-spring:2.21.1")
 }
