@@ -1,4 +1,4 @@
-package br.com.unirriter.bobsin.pdaaalert.amq;
+package br.com.unirriter.bobsin.pdaaalert.amqp;
 
 import br.com.unirriter.bobsin.pdaaalert.config.QueueConfig;
 import org.apache.camel.main.Main;

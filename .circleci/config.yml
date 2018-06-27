@@ -32,24 +32,5 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: gradle dependencies
-
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: v1-dependencies-{{ checksum "build.gradle" }}
-
-      deploy:
-            machine:
-                enabled: true
-            working_directory: ~/repo
-
-            steps:
-              - checkout
-              - run:
-                  name: Deploy Master to Heroku
-                  command: |
-                    git push https://heroku:856e0c65d3e68d84905df4c9058c28f195abc0c7@git.heroku.com/pda-a-alert.git master
-
       # run tests!
       - run: gradle test

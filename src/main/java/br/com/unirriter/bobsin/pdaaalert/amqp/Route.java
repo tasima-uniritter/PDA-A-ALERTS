@@ -1,4 +1,4 @@
-package br.com.unirriter.bobsin.pdaaalert.amq;
+package br.com.unirriter.bobsin.pdaaalert.amqp;
 
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.spring.SpringRouteBuilder;
