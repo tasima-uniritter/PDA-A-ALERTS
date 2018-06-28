@@ -1,12 +1,12 @@
 package br.com.unirriter.bobsin.pdaaalert.domain;
 
+import br.com.unirriter.bobsin.pdaaalert.enums.NotificationStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -16,36 +16,24 @@ import javax.validation.constraints.Size;
 
 public class Audit {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="ID")
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "AUDIT_ID")
+    private Long auditId;
 
-    @NotNull
-    @Size(min = 1, max = 150)
-    @Column(name="METRIC")
-    private String metric;
+    @Column(name = "METRIC_CONTENT", columnDefinition = "CLOB")
+    private String metricContent;
 
-    @NotNull
-    @Size(min = 1, max = 150)
-    @Column(name="TEAM")
-    private String team;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ENGINEER_ID")
+    private Engineer engineer;
 
-    @NotNull
-    @Size(min = 1, max = 150)
-    @Column(name="ENGINEER")
-    private String engineer;
+    @Column(name = "TRIGGER_TIMESTAMP")
+    private LocalDateTime triggerTimestamp;
 
-    @NotNull
-    @Column(name="TRIGGER_TIME")
-    private Long trigger_time;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "STATUS")
+    private NotificationStatus status;
 
-    @NotNull
-    @Size(min = 1, max = 150)
-    @Column(name="STATUS")
-    private String status;
-
-    @NotNull
-    @Size(min = 1, max = 150)
-    @Column(name="MESSAGE")
+    @Column(name = "MESSAGE", columnDefinition = "CLOB")
     private String message;
 }

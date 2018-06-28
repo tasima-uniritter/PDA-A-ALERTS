@@ -28,7 +28,7 @@ public class SwaggerConfig {
                 "Trabalho da Disciplina de Práticas de Desenvolvimento Ágil - Uniritter",
                 "1.0",
                 "Terms of service",
-                "",
+                "Anderson, Andre, Eduardo, Gian e Gustavo",
                 "Apache License Version 2.0",
                 "https://www.apache.org/licenses/LICENSE-2.0");
         return apiInfo;

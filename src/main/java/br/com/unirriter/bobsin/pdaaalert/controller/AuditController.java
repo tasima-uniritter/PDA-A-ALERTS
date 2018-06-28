@@ -23,12 +23,6 @@ public class AuditController {
         return new ResponseEntity<>(auditService.listAll(), HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/create")
-    public ResponseEntity<?> create(@RequestBody Audit audit) {
-        auditService.create(audit);
-        return new ResponseEntity(HttpStatus.CREATED);
-    }
-
     @RequestMapping(method = RequestMethod.DELETE, value = "/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         auditService.delete(id);

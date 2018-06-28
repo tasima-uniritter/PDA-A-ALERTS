@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 public class Metric {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="CODE")
+    @Column(name="METRIC_CODE")
     private Long code;
 
     @NotNull

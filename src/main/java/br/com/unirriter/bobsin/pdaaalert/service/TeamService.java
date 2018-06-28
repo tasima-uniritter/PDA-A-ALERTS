@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -29,6 +30,15 @@ public class TeamService {
 
     public void delete(Long id) {
         teamRepository.deleteById(id);
+    }
+
+    public Team getByMetricCode(String metricCode) {
+        Team team = teamRepository.findByMetricCode_Code(metricCode);
+
+        if (team == null) {
+            throw new EntityNotFoundException("Cannot find a team responsible for metric \"" + metricCode + "\"");
+        }
+        return team;
     }
 
 }

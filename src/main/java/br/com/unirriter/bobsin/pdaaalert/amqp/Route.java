@@ -14,7 +14,7 @@ public class Route extends SpringRouteBuilder {
                 .handled(false)
                 .log(LoggingLevel.ERROR, "Error in processing route!");
 
-        from("amqp:queue:a-monitor-alerts")
+        from("amqp:queue:test")
                 .log("message received");
     }
 }
