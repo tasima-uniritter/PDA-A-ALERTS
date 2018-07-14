@@ -30,7 +30,7 @@ public class SimpleEmailController {
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         
-        helper.setTo("set-your-recipient-email-here@gmail.com");
+        helper.setTo("pad.a.uniritter@gmail.com");
         helper.setText("How are you?");
         helper.setSubject("Hi");
         
