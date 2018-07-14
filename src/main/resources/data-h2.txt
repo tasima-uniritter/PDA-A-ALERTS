@@ -1,0 +1,9 @@
+INSERT INTO audit (AUDIT_ID, METRIC_CONTENT, ENGINEER_ID, TRIGGER_TIMESTAMP, STATUS, MESSAGE) VALUES (1, 'aaa!@#$%&*(aaa', 1, null, 'OK', 'tudo bem =]');
+
+INSERT INTO engineer (ENGINEER_ID, TEAM_ID, NAME, EMAIL) VALUES (1, 1, 'Brazilinio', 'vaibrasil@russia2018.com');
+
+INSERT INTO metric (METRIC_CODE, NAME, VALUE) VALUES (1, 'metrica1', '1.0');
+
+INSERT INTO schedule (SCHEDULE_ID, ENGINEER_ID, WEEK_DAY, START_TIME, END_TIME) VALUES (1, 1, 'SEGUNDA', null, null);
+
+INSERT INTO team (TEAM_ID, METRIC_CODE, NAME, DESCRIPTION) VALUES (1, 1, 'Team1', 'team_1');
