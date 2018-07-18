@@ -15,6 +15,6 @@ public class Route extends SpringRouteBuilder {
                 .log(LoggingLevel.ERROR, "Error in processing route!");
 
         from("amqp:queue:test")
-                .log("message received");
+                .log("Content ${body}");
     }
 }
