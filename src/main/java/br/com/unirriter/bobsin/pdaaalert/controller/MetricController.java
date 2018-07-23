@@ -13,21 +13,33 @@ import java.util.List;
 
 @RestController
 @EnableAutoConfiguration
-@RequestMapping("/metric")
+@RequestMapping("/metrics")
 public class MetricController {
 
     @Autowired
     private MetricService metricService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/list")
+    @RequestMapping(method = RequestMethod.POST, value = "/save")
+    public ResponseEntity<?> save(@Validated @RequestBody Metric metric) {
+        metricService.save(metric);
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteById/{id}")
+    public ResponseEntity<?> deleteById(@PathVariable Long metricId) {
+        metricService.delete(metricId);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/listAll")
     public ResponseEntity<List<Metric>> list() {
         return new ResponseEntity<>(metricService.listAll(), HttpStatus.OK);
     }
 
     @SuppressWarnings("unchecked")
-    @RequestMapping(method = RequestMethod.GET, value = "/find/{name}")
-    public ResponseEntity<Metric> findByName(@PathVariable String name) {
-        Metric metric = metricService.findByName(name);
+    @RequestMapping(method = RequestMethod.GET, value = "/findByName/{name}")
+    public ResponseEntity<Metric> findByMetricName(@PathVariable String metricName) {
+        Metric metric = metricService.findByMetricName(metricName);
         if (metric != null) {
             return new ResponseEntity(metric, HttpStatus.OK);
         } else {
@@ -36,25 +48,13 @@ public class MetricController {
     }
 
     @SuppressWarnings("unchecked")
-    @RequestMapping(method = RequestMethod.GET, value = "/id/{id}")
-    public ResponseEntity<Metric> findById(@PathVariable long id) {
-        Metric metric = metricService.findByCode(id);
+    @RequestMapping(method = RequestMethod.GET, value = "/findById/{id}")
+    public ResponseEntity<Metric> findByMetricId(@PathVariable Long metricId) {
+        Metric metric = metricService.findByMetricId(metricId);
         if (metric != null) {
             return new ResponseEntity(metric, HttpStatus.OK);
         } else {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/create")
-    public ResponseEntity<?> create(@Validated @RequestBody Metric metric) {
-        metricService.create(metric);
-        return new ResponseEntity(HttpStatus.CREATED);
-    }
-
-    @RequestMapping(method = RequestMethod.DELETE, value = "/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        metricService.delete(id);
-        return new ResponseEntity(HttpStatus.OK);
     }
 }

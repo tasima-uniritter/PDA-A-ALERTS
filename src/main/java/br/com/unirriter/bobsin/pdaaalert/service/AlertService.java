@@ -32,14 +32,13 @@ public class AlertService {
 
             boolean isEngineerOnCallAvailable = false;
 
-            Team team = teamService.getByMetricCode(metricPayload.getMetric());
+            Team team = teamService.findByTeamMetricId(metricPayload.getMetric());
 
             for (Engineer engineer : team.getEngineer()) {
                 List<Schedule> engineerSchedule = engineer.getEngineerSchedule();
                 for (Schedule schedule : engineerSchedule) {
-                    if (schedule.getWeekDay().equals(metricInstantDayOfWeek)) {
+                    if (schedule.getScheduleWeekDay().equals(metricInstantDayOfWeek)) {
                         if (isEngineerOnCall(schedule, metricInstantTime)) {
-                            sendAlertEmail(metricPayload, engineer);
                             isEngineerOnCallAvailable = true;
                         }
                     }
@@ -56,8 +55,8 @@ public class AlertService {
     }
 
     private boolean isEngineerOnCall(Schedule dailySchedule, LocalTime metricInstantTime) {
-        LocalTime startOnCall = dailySchedule.getStartTime();
-        LocalTime endOnCall = dailySchedule.getEndTime();
+        LocalTime startOnCall = dailySchedule.getScheduleStartTime();
+        LocalTime endOnCall = dailySchedule.getScheduleEndTime();
         if (startOnCall.isAfter(endOnCall)) {
             return !metricInstantTime.isBefore(startOnCall) || !metricInstantTime.isAfter(endOnCall);
         } else {
@@ -65,20 +64,4 @@ public class AlertService {
         }
     }
 
-    private void sendAlertEmail(MetricDTO metricContent, Engineer engineerOnCall) {
-        try {
-            SimpleMailMessage message = new SimpleMailMessage();
-
-            message.setSubject("[TDA-A-ALERT] Container " + metricContent.getOrigin() + " needs your attention!");
-            message.setText("Dear Engineer \"" + engineerOnCall.getName() + "\" from Team \"" + engineerOnCall.getTeamId().getName() + "\" please check the following alert: \n\n" + metricContent.toString());
-            message.setTo(engineerOnCall.getEmail());
-            message.setFrom("anderson.baum@gmail.com");
-
-            mailSender.send(message);
-
-            auditService.save(engineerOnCall, metricContent, NotificationStatus.SUCCESS, "Email sent.");
-        } catch (Exception exception) {
-            auditService.save(engineerOnCall, metricContent, NotificationStatus.FAILURE, exception.getMessage());
-        }
-    }
 }

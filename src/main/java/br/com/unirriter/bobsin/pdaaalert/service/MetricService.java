@@ -10,29 +10,27 @@ import java.util.List;
 
 @Service
 @Transactional
-
 public class MetricService {
     @Autowired
     private MetricRepository metricRepository;
 
-    public void create(Metric metric) {
-        metricRepository.save(metric);
+    public Metric save(Metric metric) {
+        return this.metricRepository.save(metric);
+    }
+
+    public void delete(Long metricId) {
+        metricRepository.deleteById(metricId);
     }
 
     public List<Metric> listAll() {
         return metricRepository.findAll();
     }
 
-    public Metric findByCode(Long id) {
-        return metricRepository.findByCode(id);
+    public Metric findByMetricId(Long metricId) {
+        return metricRepository.findByMetricId(metricId);
     }
 
-    public Metric findByName(String name) {
-        return metricRepository.findByName(name);
+    public Metric findByMetricName(String metricName) {
+        return metricRepository.findByMetricName(metricName);
     }
-
-    public void delete(Long id) {
-        metricRepository.deleteById(id);
-    }
-
 }

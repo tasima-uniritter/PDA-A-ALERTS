@@ -50,4 +50,5 @@ dependencies {
 	runtime('org.springframework.boot:spring-boot-devtools')
     compile("org.apache.camel:camel-amqp:2.21.1")
     compile("org.apache.camel:camel-spring:2.21.1")
+	compile("org.apache.camel:camel-http4:2.21.1")
 }

@@ -6,11 +6,11 @@ import lombok.Data;
 
 @Data
 public class MetricDTO {
-    private String metric;
     private String origin;
+    private Long metric;
     private Integer value;
-    private String rule;
     private String timestamp;
+    private String rule;
     private Integer threshold;
 
     @Override

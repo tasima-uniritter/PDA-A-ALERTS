@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/alert")
+@RequestMapping("/alerts")
 public class AlertController {
 
     private AlertService alertService;

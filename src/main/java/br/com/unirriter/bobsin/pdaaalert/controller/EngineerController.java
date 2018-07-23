@@ -12,21 +12,33 @@ import java.util.List;
 
 @RestController
 @EnableAutoConfiguration
-@RequestMapping("/engineer")
+@RequestMapping("/engineers")
 public class EngineerController {
 
     @Autowired
     private EngineerService engineerService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/list")
+    @RequestMapping(method = RequestMethod.POST, value = "/save")
+    public ResponseEntity<?> save(@RequestBody Engineer engineer) {
+        engineerService.save(engineer);
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteById/{id}")
+    public ResponseEntity<?> deleteById(@PathVariable Long engineerId) {
+        engineerService.delete(engineerId);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/listAll")
     public ResponseEntity<List<Engineer>> list() {
         return new ResponseEntity<>(engineerService.listAll(), HttpStatus.OK);
     }
 
     @SuppressWarnings("unchecked")
-    @RequestMapping(method = RequestMethod.GET, value = "/find/{name}")
-    public ResponseEntity<Engineer> findByName(@PathVariable String name) {
-        Engineer engineer = engineerService.findByName(name);
+    @RequestMapping(method = RequestMethod.GET, value = "/findById/{id}")
+    public ResponseEntity<Engineer> findByEngineerId(@PathVariable Long engineerId) {
+        Engineer engineer = engineerService.findByEngineerId(engineerId);
         if (engineer != null) {
             return new ResponseEntity(engineer, HttpStatus.OK);
         } else {
@@ -34,15 +46,35 @@ public class EngineerController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/create")
-    public ResponseEntity<?> create(@RequestBody Engineer engineer) {
-        engineerService.create(engineer);
-        return new ResponseEntity(HttpStatus.CREATED);
+    @SuppressWarnings("unchecked")
+    @RequestMapping(method = RequestMethod.GET, value = "/findByName/{name}")
+    public ResponseEntity<Engineer> findByEngineerName(@PathVariable String engineerName) {
+        Engineer engineer = engineerService.findByEngineerName(engineerName);
+        if (engineer != null) {
+            return new ResponseEntity(engineer, HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        engineerService.delete(id);
-        return new ResponseEntity(HttpStatus.OK);
+    @SuppressWarnings("unchecked")
+    @RequestMapping(method = RequestMethod.GET, value = "/findByTeamId/{id}")
+    public ResponseEntity<Engineer> findByTeamId(@PathVariable Long teamId) {
+        List<Engineer> engineer = engineerService.findByTeamId(teamId);
+        if (engineer != null) {
+            return new ResponseEntity(engineer, HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/assignEngineerTeamId")
+    public ResponseEntity assignEngineerTeamId(@PathVariable Long engineerId, Long teamId) {
+        Engineer engineer = engineerService.assignEngineerTeamId(engineerId, teamId);
+        if (engineer != null) {
+            return new ResponseEntity(HttpStatus.ACCEPTED);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
     }
 }

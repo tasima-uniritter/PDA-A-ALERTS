@@ -20,7 +20,7 @@ public class TeamSerializer extends StdSerializer<Team> {
     @Override
     public void serialize(Team value, JsonGenerator gen, SerializerProvider arg2) throws IOException {
         gen.writeStartObject();
-        gen.writeStringField("name", value.getName());
+        gen.writeStringField("name", value.getTeamName());
         gen.writeEndObject();
     }
 }

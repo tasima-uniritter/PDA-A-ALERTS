@@ -12,21 +12,33 @@ import java.util.List;
 
 @RestController
 @EnableAutoConfiguration
-@RequestMapping("/team")
+@RequestMapping("/teams")
 public class TeamController {
 
     @Autowired
     private TeamService teamService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/list")
+    @RequestMapping(method = RequestMethod.POST, value = "/save")
+    public ResponseEntity<?> save(@RequestBody Team team) {
+        teamService.save(team);
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteById/{id}")
+    public ResponseEntity<?> deleteById(@PathVariable Long teamId) {
+        teamService.delete(teamId);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/listAll")
     public ResponseEntity<List<Team>> list() {
         return new ResponseEntity<>(teamService.listAll(), HttpStatus.OK);
     }
 
     @SuppressWarnings("unchecked")
-    @RequestMapping(method = RequestMethod.GET, value = "/find/{name}")
-    public ResponseEntity<Team> findByName(@PathVariable String name) {
-        Team team = teamService.findByName(name);
+    @RequestMapping(method = RequestMethod.GET, value = "/findById/{id}")
+    public ResponseEntity<Team> findByTeamId(@PathVariable Long teamId) {
+        Team team = teamService.findByTeamId(teamId);
         if (team != null) {
             return new ResponseEntity(team, HttpStatus.OK);
         } else {
@@ -34,15 +46,25 @@ public class TeamController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/create")
-    public ResponseEntity<?> create(@RequestBody Team team) {
-        teamService.create(team);
-        return new ResponseEntity(HttpStatus.CREATED);
+    @SuppressWarnings("unchecked")
+    @RequestMapping(method = RequestMethod.GET, value = "/findByName/{name}")
+    public ResponseEntity<Team> findByTeamName(@PathVariable String teamName) {
+        Team team = teamService.findByTeamName(teamName);
+        if (team != null) {
+            return new ResponseEntity(team, HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        teamService.delete(id);
-        return new ResponseEntity(HttpStatus.OK);
+    @SuppressWarnings("unchecked")
+    @RequestMapping(method = RequestMethod.GET, value = "/findByMetricId/{id}")
+    public ResponseEntity<Team> findByTeamMetricId(@PathVariable Long metricId) {
+        Team team = teamService.findByTeamMetricId(metricId);
+        if (team != null) {
+            return new ResponseEntity(team, HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
     }
 }

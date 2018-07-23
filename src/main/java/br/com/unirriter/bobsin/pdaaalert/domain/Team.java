@@ -9,9 +9,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-
 import javax.persistence.*;
 import java.util.List;
+
+/*
+  Um Team é uma unidade de organização responsável por uma única Metric (ex.: Memória, CPU, Disco).
+  Ele é composto por Engineer (n) e uma Metric (1).
+*/
 
 @Data
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -26,16 +30,16 @@ public class Team {
     @Column(name="TEAM_ID")
     private Long teamId;
 
+    @Column(name="TEAM_NAME", unique = true)
+    private String teamName;
+
+    @Column(name="TEAM_DESCRIPTION")
+    private String teamDescription;
+
     @ManyToOne
-    @JoinColumn(name = "METRIC_CODE", unique = true)
+    @JoinColumn(name = "METRIC_ID", unique = true)
     @JsonSerialize(using = MetricSerializer.class)
-    private Metric metricCode;
-
-    @Column(name="NAME", unique = true)
-    private String name;
-
-    @Column(name="DESCRIPTION")
-    private String description;
+    private Metric teamMetricId;
 
     @JsonBackReference
     @Fetch(FetchMode.SELECT)

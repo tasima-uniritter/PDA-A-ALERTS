@@ -16,29 +16,32 @@ public class TeamService {
     @Autowired
     private TeamRepository teamRepository;
 
-    public void create(Team team) {
-        teamRepository.save(team);
+    public Team save(Team team) {
+        return this.teamRepository.save(team);
+    }
+
+    public void delete(Long teamId) {
+        teamRepository.deleteById(teamId);
     }
 
     public List<Team> listAll() {
         return teamRepository.findAll();
     }
 
-    public Team findByName(String name) {
-        return teamRepository.findByName(name);
+    public Team findByTeamId(Long teamId) throws EntityNotFoundException {
+        return this.teamRepository.getOne(teamId);
     }
 
-    public void delete(Long id) {
-        teamRepository.deleteById(id);
+    public Team findByTeamName(String teamName) {
+        return teamRepository.findByTeamName(teamName);
     }
 
-    public Team getByMetricCode(String metricCode) {
-        Team team = teamRepository.findByMetricCode_Code(metricCode);
+    public Team findByTeamMetricId(Long metricId) {
+        Team team = teamRepository.findByTeamMetricId(metricId);
 
         if (team == null) {
-            throw new EntityNotFoundException("Cannot find a team responsible for metric \"" + metricCode + "\"");
+            throw new EntityNotFoundException("Cannot find a team responsible for metric \"" + metricId + "\"");
         }
         return team;
     }
-
 }
