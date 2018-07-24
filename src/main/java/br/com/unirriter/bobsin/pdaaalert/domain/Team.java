@@ -36,10 +36,19 @@ public class Team {
     @Column(name="TEAM_DESCRIPTION")
     private String teamDescription;
 
-    @ManyToOne
+    @JsonBackReference
+    @OneToOne
     @JoinColumn(name = "METRIC_ID", unique = true)
     @JsonSerialize(using = MetricSerializer.class)
+    @Fetch(FetchMode.SELECT)
     private Metric teamMetricId;
+
+    @JsonBackReference
+    @OneToOne
+    @JoinColumn(name = "METRIC_NAME", unique = true)
+    @JsonSerialize(using = MetricSerializer.class)
+    @Fetch(FetchMode.SELECT)
+    private Metric teamMetricName;
 
     @JsonBackReference
     @Fetch(FetchMode.SELECT)

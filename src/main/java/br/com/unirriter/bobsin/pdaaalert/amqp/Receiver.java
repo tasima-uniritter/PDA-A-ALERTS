@@ -5,6 +5,10 @@ import org.apache.camel.main.Main;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+/*
+    Cria uma nova conexão com a fila no AMQP, utilizando a configuração estabelecida no arquivo QueueConfig
+*/
+
 @Component
 public class Receiver implements CommandLineRunner {
 

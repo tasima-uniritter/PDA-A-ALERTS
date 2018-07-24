@@ -44,5 +44,5 @@ public class Audit {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "METRIC_ID")
-    private Engineer metricId;
+    private Metric metricId;
 }

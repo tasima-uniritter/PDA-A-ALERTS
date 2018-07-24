@@ -1,5 +1,6 @@
 package br.com.unirriter.bobsin.pdaaalert.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,7 +26,12 @@ public class Metric {
     @Column(name="METRIC_ID")
     private Long metricId;
 
+    @JsonBackReference
     @NotNull
     @Column(name="METRIC_NAME", unique = true)
     private String metricName;
+
+    @OneToOne
+    @JoinColumn(name = "METRIC_ID", referencedColumnName = "TEAM_ID")
+    private Team teamId;
 }

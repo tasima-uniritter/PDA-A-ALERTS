@@ -18,7 +18,7 @@ public class AlertController {
     private AlertService alertService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/sendAlert")
-    public ResponseEntity<MetricDTO> saveTeam(@RequestBody MetricDTO metricDTO) {
+    public ResponseEntity<MetricDTO> sendAlertFromMonitor(MetricDTO metricDTO) {
         ResponseEntity<MetricDTO> response;
         try {
             alertService.sendAlertFromMonitor(metricDTO);

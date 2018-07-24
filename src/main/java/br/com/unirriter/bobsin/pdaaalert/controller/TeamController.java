@@ -67,4 +67,15 @@ public class TeamController {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
+
+    @SuppressWarnings("unchecked")
+    @RequestMapping(method = RequestMethod.GET, value = "/findByTeamMetricName/{name}")
+    public ResponseEntity<Team> findByTeamMetricName(@PathVariable String metricName) {
+        Team team = teamService.findByTeamMetricName(metricName);
+        if (team != null) {
+            return new ResponseEntity(team, HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
 }

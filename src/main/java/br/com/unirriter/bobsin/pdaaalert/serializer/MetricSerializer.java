@@ -19,7 +19,8 @@ public class MetricSerializer extends StdSerializer<Metric> {
     @Override
     public void serialize(Metric value, JsonGenerator gen, SerializerProvider arg2) throws IOException {
         gen.writeStartObject();
-        gen.writeStringField("code", String.valueOf(value.getMetricId()));
+        gen.writeStringField("id", String.valueOf(value.getMetricId()));
+        gen.writeStringField("name", String.valueOf(value.getMetricName()));
         gen.writeEndObject();
     }
 }

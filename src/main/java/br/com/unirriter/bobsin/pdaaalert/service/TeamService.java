@@ -1,5 +1,6 @@
 package br.com.unirriter.bobsin.pdaaalert.service;
 
+import br.com.unirriter.bobsin.pdaaalert.domain.Metric;
 import br.com.unirriter.bobsin.pdaaalert.domain.Team;
 import br.com.unirriter.bobsin.pdaaalert.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,15 @@ public class TeamService {
 
         if (team == null) {
             throw new EntityNotFoundException("Cannot find a team responsible for metric \"" + metricId + "\"");
+        }
+        return team;
+    }
+
+    public Team findByTeamMetricName(String metricName) {
+        Team team = teamRepository.findByTeamMetricName(metricName);
+
+        if (team == null) {
+            throw new EntityNotFoundException("Cannot find a team responsible for metric \"" + metricName + "\"");
         }
         return team;
     }

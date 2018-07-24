@@ -25,6 +25,7 @@ public class AlertService {
     private AuditService auditService;
 
     public void sendAlertFromMonitor(MetricDTO metricPayload) throws Exception {
+        System.out.println("passei");
         try {
             LocalDateTime metricInstantDateTime = LocalDateTime.now();
             DayOfWeek metricInstantDayOfWeek = DayOfWeek.from(metricInstantDateTime);
@@ -32,7 +33,7 @@ public class AlertService {
 
             boolean isEngineerOnCallAvailable = false;
 
-            Team team = teamService.findByTeamMetricId(metricPayload.getMetric());
+            Team team = teamService.findByTeamMetricName(metricPayload.getMetric());
 
             for (Engineer engineer : team.getEngineer()) {
                 List<Schedule> engineerSchedule = engineer.getEngineerSchedule();

@@ -3,6 +3,11 @@ package br.com.unirriter.bobsin.pdaaalert.config;
 import org.apache.camel.component.amqp.AMQPConnectionDetails;
 import org.springframework.stereotype.Component;
 
+/*
+    Estabelece a configuração para acessar a fila AMQP na Amazon.
+    Importante: não comitar o usuário e senha em AMQP_SERVICE_USERNAME e AMQP_SERVICE_PASSWORD. Deverá passar os parâmetros
+    System.getenv("user"); e System.getenv("pass"); que serão alimentados pelas variáveis do Heroku.
+*/
 @Component
 public class QueueConfig {
 
