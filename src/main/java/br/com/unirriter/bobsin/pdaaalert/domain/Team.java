@@ -1,16 +1,28 @@
 package br.com.unirriter.bobsin.pdaaalert.domain;
 
-import br.com.unirriter.bobsin.pdaaalert.serializer.MetricSerializer;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import br.com.unirriter.bobsin.pdaaalert.serializer.MetricSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import javax.persistence.*;
-import java.util.List;
 
 /*
   Um Team é uma unidade de organização responsável por uma única Metric (ex.: Memória, CPU, Disco).
@@ -23,7 +35,6 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name="TEAM")
-
 public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

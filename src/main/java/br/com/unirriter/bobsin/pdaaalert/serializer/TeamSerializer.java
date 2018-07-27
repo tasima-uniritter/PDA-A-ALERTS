@@ -1,11 +1,12 @@
 package br.com.unirriter.bobsin.pdaaalert.serializer;
 
+import java.io.IOException;
+
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import br.com.unirriter.bobsin.pdaaalert.domain.Team;
 
-import java.io.IOException;
+import br.com.unirriter.bobsin.pdaaalert.domain.Team;
 
 public class TeamSerializer extends StdSerializer<Team> {
 

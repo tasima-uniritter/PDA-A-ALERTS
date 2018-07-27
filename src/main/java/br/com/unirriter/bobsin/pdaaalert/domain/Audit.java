@@ -1,12 +1,23 @@
 package br.com.unirriter.bobsin.pdaaalert.domain;
 
+import java.time.LocalDateTime;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import br.com.unirriter.bobsin.pdaaalert.enums.NotificationStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.time.LocalDateTime;
 
 /*
   Uma Audit é uma tabela que grava todos os eventos de alerta, enviados ou não, aos Engineer.
@@ -18,7 +29,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name="AUDIT")
-
 public class Audit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,20 +1,20 @@
 package br.com.unirriter.bobsin.pdaaalert.service;
 
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Component;
+
 import br.com.unirriter.bobsin.pdaaalert.domain.Engineer;
 import br.com.unirriter.bobsin.pdaaalert.domain.Schedule;
 import br.com.unirriter.bobsin.pdaaalert.domain.Team;
 import br.com.unirriter.bobsin.pdaaalert.dto.MetricDTO;
 import br.com.unirriter.bobsin.pdaaalert.enums.NotificationStatus;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.stereotype.Component;
-
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.List;
 
 @Component
 @AllArgsConstructor

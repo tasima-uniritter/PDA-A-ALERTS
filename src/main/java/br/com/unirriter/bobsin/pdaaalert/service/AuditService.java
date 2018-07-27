@@ -1,14 +1,16 @@
 package br.com.unirriter.bobsin.pdaaalert.service;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
 import br.com.unirriter.bobsin.pdaaalert.domain.Audit;
 import br.com.unirriter.bobsin.pdaaalert.domain.Engineer;
 import br.com.unirriter.bobsin.pdaaalert.dto.MetricDTO;
 import br.com.unirriter.bobsin.pdaaalert.enums.NotificationStatus;
 import br.com.unirriter.bobsin.pdaaalert.repository.AuditRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Component
 @AllArgsConstructor
