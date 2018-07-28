@@ -24,7 +24,7 @@ public class SimpleEmailController {
 
   @RequestMapping("/simpleemail")
   @ResponseBody
-  String home() {
+  public String home() {
     try {
       sendEmail();
       return "Email Sent!";

@@ -18,7 +18,7 @@ public class Route extends SpringRouteBuilder {
 			
     @Override
     public void configure() {
-    	String queue = isProd ? QUEUE_PROD : QUEUE_TEST;
+    	String queue = !isProd ? QUEUE_PROD : QUEUE_TEST;
     	
         onException(Exception.class)
                 .handled(false)

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
+import br.com.unirriter.bobsin.pdaaalert.controller.SimpleEmailController;
 import br.com.unirriter.bobsin.pdaaalert.domain.Engineer;
 import br.com.unirriter.bobsin.pdaaalert.domain.Schedule;
 import br.com.unirriter.bobsin.pdaaalert.domain.Team;
@@ -23,6 +24,9 @@ public class AlertService {
     @Autowired
     private JavaMailSender mailSender;
     private AuditService auditService;
+    
+    @Autowired
+    SimpleEmailController email;
 
     public void sendAlertFromMonitor(MetricDTO metricPayload) throws Exception {
         System.out.println("passei");
@@ -33,21 +37,26 @@ public class AlertService {
 
             boolean isEngineerOnCallAvailable = false;
 
-            Team team = teamService.findByTeamMetricName(metricPayload.getMetric());
-
-            for (Engineer engineer : team.getEngineer()) {
-                List<Schedule> engineerSchedule = engineer.getEngineerSchedule();
-                for (Schedule schedule : engineerSchedule) {
-                    if (schedule.getScheduleWeekDay().equals(metricInstantDayOfWeek)) {
-                        if (isEngineerOnCall(schedule, metricInstantTime)) {
-                            isEngineerOnCallAvailable = true;
-                        }
-                    }
-                }
-            }
-
-            if (!isEngineerOnCallAvailable) {
+            if (null != metricPayload.getMetric()) {
+	            Team team = teamService.findByTeamMetricName(metricPayload.getMetric());
+	
+	            for (Engineer engineer : team.getEngineer()) {
+	                List<Schedule> engineerSchedule = engineer.getEngineerSchedule();
+	                for (Schedule schedule : engineerSchedule) {
+	                    if (schedule.getScheduleWeekDay().equals(metricInstantDayOfWeek)) {
+	                        if (isEngineerOnCall(schedule, metricInstantTime)) {
+	                            isEngineerOnCallAvailable = true;
+	                        }
+	                    }
+	                }
+	            }
+        	}
+            
+        	if (!isEngineerOnCallAvailable) {
                 auditService.save(null, metricPayload, NotificationStatus.FAILURE, "No Engineers available at this moment!.");
+            } else {
+            	// sendmail
+            	email.home();
             }
 
         } catch (Exception exception) {
