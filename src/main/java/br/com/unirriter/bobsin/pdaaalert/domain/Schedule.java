@@ -1,13 +1,25 @@
 package br.com.unirriter.bobsin.pdaaalert.domain;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.time.DayOfWeek;
-import java.time.LocalTime;
 
 /*
   Um Schedule é uma agenda contendo as escalas de trabalho dos Engineer.
@@ -25,7 +37,6 @@ import java.time.LocalTime;
             @UniqueConstraint(columnNames = {"ENGINEER_ID", "SCHEDULE_WEEK_DAY", "SCHEDULE_START_TIME", "SCHEDULE_END_TIME"})
         }
         )
-
 public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
