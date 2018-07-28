@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Route extends SpringRouteBuilder {
 
-	private static final String AMQP_QUEUE = "amqp:queue";
+	private static final String AMQP_QUEUE = "amqp:queue:";
 	private static final String QUEUE_TEST = "test";
 	private static final String QUEUE_PROD = "a-monitor-alerts";
 
